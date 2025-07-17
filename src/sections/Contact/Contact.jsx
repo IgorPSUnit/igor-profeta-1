@@ -1,67 +1,71 @@
 import React from 'react';
 import { useForm, ValidationError } from '@formspree/react';
 import styles from './ContactStyles.module.css';
+import { useLanguage } from '../../common/LanguageContext';
+import { translations } from '../../common/translations';
 
 function Contact() {
   const [state, handleSubmit] = useForm("mldleznq");
+  const { language } = useLanguage();
+  const t = translations[language];
 
   if (state.succeeded) {
     return (
       <section id="contact" className={styles.container}>
-        <p className={styles.successMessage}>Thanks for your message!</p>
+        <p className={styles.successMessage}>{t.successMessage}</p>
       </section>
     );
   }
 
   return (
     <section id="contact" className={styles.container}>
-      <h1 className="sectionTitle">Contact</h1>
+      <h1 className="sectionTitle">{t.contactTitle}</h1>
       <form onSubmit={handleSubmit}>
         <div className="formGroup">
           <label htmlFor="name" hidden>
-            Name
+            {t.nameLabel}
           </label>
           <input
             type="text"
             name="name"
             id="name"
-            placeholder="Name"
+            placeholder={t.namePlaceholder}
             required
           />
           <ValidationError
-            prefix="Name"
+            prefix={t.nameLabel}
             field="name"
             errors={state.errors}
           />
         </div>
         <div className="formGroup">
           <label htmlFor="email" hidden>
-            Email
+            {t.emailLabel}
           </label>
           <input
             type="email"
             name="email"
             id="email"
-            placeholder="Email"
+            placeholder={t.emailPlaceholder}
             required
           />
           <ValidationError
-            prefix="Email"
+            prefix={t.emailLabel}
             field="email"
             errors={state.errors}
           />
         </div>
         <div className="formGroup">
           <label htmlFor="message" hidden>
-            Message
+            {t.messageLabel}
           </label>
           <textarea
             name="message"
             id="message"
-            placeholder="Message"
+            placeholder={t.messagePlaceholder}
             required></textarea>
           <ValidationError
-            prefix="Message"
+            prefix={t.messageLabel}
             field="message"
             errors={state.errors}
           />
@@ -69,7 +73,7 @@ function Contact() {
         <input
           className="hover btn"
           type="submit"
-          value={state.submitting ? "Submitting..." : "Submit"}
+          value={state.submitting ? t.submittingButton : t.submitButton}
           disabled={state.submitting}
         />
       </form>

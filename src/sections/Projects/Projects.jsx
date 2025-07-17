@@ -1,18 +1,20 @@
 import React from 'react';
 import styles from './ProjectsStyles.module.css';
-import viberr from '../../assets/viberr.png';
-import freshburger from '../../assets/fresh-burger.png'
-import fitlift from '../../assets/fitlift.png';
+import little from '../../assets/lemon.png';
+import florescer from '../../assets/Florescer-logo-marca-oficial.png'
 import ProjectCard from '../../common/ProjectCard.jsx';
+import { useLanguage } from '../../common/LanguageContext';
+import { translations } from '../../common/translations';
 
 function Projects() {
+  const { language } = useLanguage();
+  const t = translations[language];
   return (
     <section id="projects" className={styles.container} >
-      <h1 className="sectionTitle">Projects</h1>
+      <h1 className="sectionTitle">{t.projectsTitle}</h1>
       <div className={styles.projectsContainer}>
-        <ProjectCard src={viberr} link="https://github.com/IgorPSUnit" h3="Vibeer" p="Coloque mais"/>
-        <ProjectCard src={freshburger} link="https://github.com/IgorPSUnit" h3="FreshBurger" p="Coloque mais"/>
-        <ProjectCard src={fitlift} link="https://github.com/IgorPSUnit" h3="FitLift" p="Coloque mais"/>
+        <ProjectCard src={little} link="https://github.com/IgorPSUnit/little-lemon" h3="Little Lemon" p={t.littleDescription}/>
+        <ProjectCard src={florescer} link="https://github.com/IgorPSUnit/florescer-social/tree/master" h3="Florescer" p={t.florescerDescription}/>
       </div>
     </section>
   );
